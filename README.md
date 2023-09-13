@@ -9,7 +9,6 @@ Resources for a tutorial that covers running KRaft mode [Kafka v3.5.x](https://d
 | Minikube | v1.29.0 |
 | Kubernetes | v1.26.1 |
 | [Confluent Kafka](https://hub.docker.com/r/confluentinc/confluent-local) | 7.5.0 |
-| [Kafka-UI](https://github.com/provectus/kafka-ui) | v0.7.1 |
 
 ## Namespace
 
