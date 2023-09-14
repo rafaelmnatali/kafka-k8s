@@ -1,6 +1,6 @@
 # Kafka em K8s
 
-Recursos para um [tutorial](https://rafaelnatali.wixsite.com/rmn-technology/pt/post/executando-o-kafka-no-kubernetes-com-o-modo-kraft) que aborda a execução do [Kafka v3.5.x](https://docs.confluent.io/platform/current/installation/versions-interoperability.html) usando o algoritmo KRaft em um cluster Kubernetes baseado no Minikube.
+Recursos para um [tutorial](https://rafaelnatali.wixsite.com/rmn-technology/pt/post/executando-o-kafka-no-kubernetes-com-o-modo-kraft) que aborda a execução do [Kafka v3.5.x](https://docs.confluent.io/platform/current/installation/versions-interoperability.html) usando o protocolo [Apache Kafka Raft (KRaft)](https://developer.confluent.io/learn/kraft/) em um cluster Kubernetes baseado no Minikube.
 
 A imagem `Confluent-Local` implanta o Apache Kafka juntamente com o `Confluent Community RestProxy`. É uma imagem experimental, projetada para fluxos de trabalho de desenvolvimento local e não é oficialmente suportada para cargas de trabalho de produção.
 
