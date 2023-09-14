@@ -1,12 +1,25 @@
 # Kafka on K8s
 
+- [Kafka on K8s](#kafka-on-k8s)
+  - [Description](#description)
+  - [Environment](#environment)
+  - [Namespace](#namespace)
+  - [Confluent Kafka](#confluent-kafka)
+    - [Service Account (kind: ServiceAccount)](#service-account-kind-serviceaccount)
+    - [Headless Service (kind: Service)](#headless-service-kind-service)
+    - [StatefulSet (kind: StatefulSet)](#statefulset-kind-statefulset)
+  - [Usage](#usage)
+    - [Deploy](#deploy)
+    - [Verify communication across brokers](#verify-communication-across-brokers)
+    - [Create a topic and recovery](#create-a-topic-and-recovery)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Description
+
 Resources for a [tutorial](https://rafaelnatali.wixsite.com/rmn-technology/post/running-kafka-in-kubernetes-with-kraft-mode) that covers running [Kafka v3.5.x](https://docs.confluent.io/platform/current/installation/versions-interoperability.html) using the consensus protocol [Apache Kafka Raft (KRaft)](https://developer.confluent.io/learn/kraft/) on a Minikube-based Kubernetes cluster.
 
 `Confluent-Local` image deploys Apache Kafka along with Confluent Community RestProxy. It is experimental, built for local development workflows and is not officially supported for production workloads.
-
-
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
 
 ## Environment
 
