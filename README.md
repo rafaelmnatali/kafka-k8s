@@ -2,6 +2,8 @@
 
 Resources for a tutorial that covers running KRaft mode [Kafka v3.5.x](https://docs.confluent.io/platform/current/installation/versions-interoperability.html) on a Minikube-based Kubernetes cluster.
 
+`Confluent-Local` image deploys Apache Kafka along with Confluent Community RestProxy. It is experimental, built for local development workflows and is not officially supported for production workloads.
+
 ## Environment
 
 | Technology | Version |
@@ -36,7 +38,7 @@ It exposes ports `9092` (for Kafka clients) and `29093` (for Kafka Controller).
 
 A [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) named `kafka` is configured in the `kafka` namespace with three replicas.
 
-It manages Kafka pods and ensures they have stable hostnames and storage (`PersistentVolumes`).
+It manages Kafka pods and ensures they have stable hostnames and storage.
 
 Each pod is associated with the headless service `kafka-headless` and the service account `kafka.` The pods use the Confluent Kafka Docker image (version 7.5.0). At the time of writing, this is the latest Confluent release. 
 

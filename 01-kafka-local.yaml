@@ -104,12 +104,8 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
-        - mountPath: /var/lib/kafka/data
-          name: data
         - mountPath: /etc/kafka
           name: config
-        - mountPath: /var/log
-          name: logs
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
@@ -119,22 +115,5 @@ spec:
       volumes:
       - emptyDir: {}
         name: config
-      - emptyDir: {}
-        name: logs
   updateStrategy:
     type: RollingUpdate
-  volumeClaimTemplates:
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: data
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 100Gi
-      storageClassName: standard
-      volumeMode: Filesystem
-    status:
-      phase: Pending
