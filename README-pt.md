@@ -12,8 +12,8 @@
     - [Implantaçāo](#implantaçāo)
     - [Verifique a comunicação entre os brokers](#verifique-a-comunicação-entre-os-brokers)
     - [Criar um tópico e testar a tolerância a falhas](#criar-um-tópico-e-testar-a-tolerância-a-falhas)
-- [Contributing](#contributing)
-- [License](#license)
+- [Contribuindo](#contribuindo)
+- [Licença](#licença)
 
 
 ## Descriçāo
@@ -143,8 +143,8 @@ Topic: test     TopicId: WmMXgsr2RcyZU9ohfoTUWQ PartitionCount: 3 ReplicationFac
 
 Podemos ver que existem duas réplicas sincronizadas (brokers 0 and 1).
 
-# Contributing
-Feel free to contribute by opening issues or pull requests.
+# Contribuindo
+Fique a vontade para contribuir abrindo _issues_ ou _pull requests_.
 
-# License
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+# Licença
+Este projeto está licensiado usando a MIT License - vejo o arquivo [LICENSE](./LICENSE) para detalhes.
