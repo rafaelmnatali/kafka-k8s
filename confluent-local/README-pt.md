@@ -1,6 +1,6 @@
-# Kafka em K8s
+# Kafka em K8s - Instalaçāo local
 
-- [Kafka em K8s](#kafka-em-k8s)
+- [Kafka em K8s - Instalaçāo local](#kafka-em-k8s---instalaçāo-local)
   - [Descriçāo](#descriçāo)
   - [Ambiente](#ambiente)
   - [Namespace](#namespace)
@@ -12,8 +12,8 @@
     - [Implantaçāo](#implantaçāo)
     - [Verifique a comunicação entre os brokers](#verifique-a-comunicação-entre-os-brokers)
     - [Criar um tópico e testar a tolerância a falhas](#criar-um-tópico-e-testar-a-tolerância-a-falhas)
-- [Contribuindo](#contribuindo)
-- [Licença](#licença)
+  - [Contribuindo](#contribuindo)
+  - [Licença](#licença)
 
 
 ## Descriçāo
@@ -143,8 +143,10 @@ Topic: test     TopicId: WmMXgsr2RcyZU9ohfoTUWQ PartitionCount: 3 ReplicationFac
 
 Podemos ver que existem duas réplicas sincronizadas (brokers 0 and 1).
 
-# Contribuindo
+## Contribuindo
+
 Fique a vontade para contribuir abrindo _issues_ ou _pull requests_.
 
-# Licença
-Este projeto está licensiado usando a MIT License - vejo o arquivo [LICENSE](./LICENSE) para detalhes.
+## Licença
+
+Este projeto está licensiado usando a MIT License - vejo o arquivo [LICENSE](../LICENSE) para detalhes.

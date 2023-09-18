@@ -1,6 +1,6 @@
-# Kafka on K8s
+# Kafka on K8s - Local environment
 
-- [Kafka on K8s](#kafka-on-k8s)
+- [Kafka on K8s - Local environment](#kafka-on-k8s---local-environment)
   - [Description](#description)
   - [Environment](#environment)
   - [Namespace](#namespace)
@@ -12,8 +12,8 @@
     - [Deploy](#deploy)
     - [Verify communication across brokers](#verify-communication-across-brokers)
     - [Create a topic and recovery](#create-a-topic-and-recovery)
-- [Contributing](#contributing)
-- [License](#license)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Description
 
@@ -157,8 +157,10 @@ Topic: test     TopicId: WmMXgsr2RcyZU9ohfoTUWQ PartitionCount: 3 ReplicationFac
 
 Notice that there are only two in-sync replicas for each partition (brokers 0 and 1).
 
-# Contributing
+## Contributing
+
 Feel free to contribute by opening issues or pull requests.
 
-# License
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
