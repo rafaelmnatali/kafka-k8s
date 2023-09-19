@@ -25,6 +25,10 @@ spec:
     port: 9092
     protocol: TCP
     targetPort: tcp-kafka-int
+  - name: tcp-kafka-ssl
+    port: 9093
+    protocol: TCP
+    targetPort: tcp-kafka-ssl
   selector:
     app: kafka
   sessionAffinity: None
@@ -57,11 +61,21 @@ spec:
         - -exc
         - |
           export KAFKA_NODE_ID=${HOSTNAME##*-} && \
-          export KAFKA_LISTENER_SECURITY_PROTOCOL_MAP='CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT'
-          export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${POD_NAME}.kafka-headless.kafka.svc.cluster.local:9092
+          export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${POD_NAME}.kafka-headless.kafka.svc.cluster.local:9092,SSL://${POD_NAME}.kafka-headless.kafka.svc.cluster.local:9093
+          export KAFKA_SSL_TRUSTSTORE_FILENAME=${POD_NAME}.server.truststore.jks
+          export KAFKA_SSL_KEYSTORE_FILENAME=${POD_NAME}.server.keystore.jks
+          export KAFKA_OPTS="-Djavax.net.debug=all"
 
           exec /etc/confluent/docker/run
         env:
+        - name: KAFKA_SSL_KEY_CREDENTIALS
+          value: "broker_creds"
+        - name: KAFKA_SSL_KEYSTORE_CREDENTIALS
+          value: "broker_creds"
+        - name: KAFKA_SSL_TRUSTSTORE_CREDENTIALS
+          value: "broker_creds"
+        - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
+          value: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,SSL:SSL"
         - name: CLUSTER_ID
           value: "6PMpHYL9QkeyXRj9Nrp4KA"
         - name: KAFKA_CONTROLLER_QUORUM_VOTERS
@@ -76,12 +90,10 @@ spec:
           value: "3"
         - name: KAFKA_MIN_INSYNC_REPLICAS
           value: "2"
-        - name: KAFKA_INTER_BROKER_LISTENER_NAME
-          value: "PLAINTEXT"
         - name: KAFKA_CONTROLLER_LISTENER_NAMES
           value: "CONTROLLER"
         - name: KAFKA_LISTENERS
-          value: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:29093
+          value: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:29093,SSL://0.0.0.0:9093
         - name: POD_NAME
           valueFrom:
             fieldRef:
@@ -105,6 +117,9 @@ spec:
         - containerPort: 29093
           name: tcp-kafka-ctrl
           protocol: TCP
+        - containerPort: 9093
+          name: tcp-kafka-ssl
+          protocol: TCP
         resources:
           limits:
             cpu: "1"
@@ -117,12 +132,13 @@ spec:
           capabilities:
             drop:
             - ALL
-          # readOnlyRootFilesystem: true
           runAsGroup: 1000
           runAsUser: 1000
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
+        - mountPath: /etc/kafka/secrets/
+          name: kafka-ssl
         - mountPath: /etc/kafka
           name: config
         - mountPath: /var/lib/kafka/data
@@ -140,6 +156,9 @@ spec:
         name: config
       - emptyDir: {}
         name: logs
+      - name: kafka-ssl
+        configMap: 
+          name: kafka-ssl
   updateStrategy:
     type: RollingUpdate
   volumeClaimTemplates:
