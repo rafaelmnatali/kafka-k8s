@@ -172,7 +172,7 @@ To sign all certificates in the keystore with the CA that you generated:
     keytool -keystore kafka-2.server.keystore.jks -alias kafka-2 -importcert -file cert-signed-kafka-2
     ```
 
-> :warning: The `keystore`, `truststore`, and `ca-cert` files will be used to create the [ConfigMap](https://kubernetes.io/docs/concepts/configuration/configmap/) for our deployment.
+> :warning: The `keystore` and `truststore` files will be used to create the [ConfigMap](https://kubernetes.io/docs/concepts/configuration/configmap/) for our deployment.
 
 ### ConfigMaps
 
