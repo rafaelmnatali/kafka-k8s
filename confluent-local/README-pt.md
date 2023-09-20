@@ -12,13 +12,8 @@
     - [Implantaçāo](#implantaçāo)
     - [Verifique a comunicação entre os brokers](#verifique-a-comunicação-entre-os-brokers)
     - [Criar um tópico e testar a tolerância a falhas](#criar-um-tópico-e-testar-a-tolerância-a-falhas)
-  - [Contribuindo](#contribuindo)
-  - [Licença](#licença)
-
 
 ## Descriçāo
-
-Recursos para um [tutorial](https://rafaelnatali.wixsite.com/rmn-technology/pt/post/executando-o-kafka-no-kubernetes-com-o-modo-kraft) que aborda a execução do [Kafka v3.5.x](https://docs.confluent.io/platform/current/installation/versions-interoperability.html) usando o protocolo [Apache Kafka Raft (KRaft)](https://developer.confluent.io/learn/kraft/) em um cluster Kubernetes baseado no Minikube.
 
 A imagem `Confluent-Local` implanta o Apache Kafka juntamente com o `Confluent Community RestProxy`. É uma imagem experimental, projetada para fluxos de trabalho de desenvolvimento local e não é oficialmente suportada para cargas de trabalho de produção.
 
@@ -142,11 +137,3 @@ Topic: test     TopicId: WmMXgsr2RcyZU9ohfoTUWQ PartitionCount: 3 ReplicationFac
 ```
 
 Podemos ver que existem duas réplicas sincronizadas (brokers 0 and 1).
-
-## Contribuindo
-
-Fique a vontade para contribuir abrindo _issues_ ou _pull requests_.
-
-## Licença
-
-Este projeto está licensiado usando a MIT License - vejo o arquivo [LICENSE](../LICENSE) para detalhes.

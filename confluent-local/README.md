@@ -12,12 +12,8 @@
     - [Deploy](#deploy)
     - [Verify communication across brokers](#verify-communication-across-brokers)
     - [Create a topic and recovery](#create-a-topic-and-recovery)
-  - [Contributing](#contributing)
-  - [License](#license)
 
 ## Description
-
-Resources for a [tutorial](https://rafaelnatali.wixsite.com/rmn-technology/post/running-kafka-in-kubernetes-with-kraft-mode) that covers running [Kafka v3.5.x](https://docs.confluent.io/platform/current/installation/versions-interoperability.html) using the consensus protocol [Apache Kafka Raft (KRaft)](https://developer.confluent.io/learn/kraft/) on a Minikube-based Kubernetes cluster.
 
 `Confluent-Local` image deploys Apache Kafka along with Confluent Community RestProxy. It is experimental, built for local development workflows and is not officially supported for production workloads.
 
@@ -49,7 +45,7 @@ A [Service Account](https://kubernetes.io/docs/concepts/security/service-account
 
 A [headless Service](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services) named `kafka-headless` is defined in the `kafka` namespace.
 
-It exposes ports `9092` (for Kafka clients) and `29093` (for Kafka Controller). 
+It exposes ports `9092` (for Kafka clients) and `29093` (for Kafka Controller).
 
 ### StatefulSet (kind: StatefulSet)
 
@@ -57,11 +53,11 @@ A [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statef
 
 It manages Kafka pods and ensures they have stable hostnames and storage.
 
-Each pod is associated with the headless service `kafka-headless` and the service account `kafka.` The pods use the Confluent Kafka Docker image (version 7.5.0). At the time of writing, this is the latest Confluent release. 
+Each pod is associated with the headless service `kafka-headless` and the service account `kafka.` The pods use the Confluent Kafka Docker image (version 7.5.0). At the time of writing, this is the latest Confluent release.
 
 ## Usage
 
-### Deploy 
+### Deploy
 
 You can deploy Kafka using the following commands:
 
@@ -117,7 +113,7 @@ Open terminal on pod `kafka-0``:
 kubectl exec -it kafka-0 -- bash
 ```
 
-Create a topic named `test` with three partitions and a replication factor of 3. 
+Create a topic named `test` with three partitions and a replication factor of 3.
 
 ```bash
 kafka-topics --create --topic test --partitions 3 --replication-factor 3 --bootstrap-server kafka-0.kafka-headless.kafka.svc.cluster.local:9092
@@ -156,11 +152,3 @@ Topic: test     TopicId: WmMXgsr2RcyZU9ohfoTUWQ PartitionCount: 3 ReplicationFac
 ```
 
 Notice that there are only two in-sync replicas for each partition (brokers 0 and 1).
-
-## Contributing
-
-Feel free to contribute by opening issues or pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
