@@ -352,7 +352,6 @@ INFO [Controller 0] Unfenced broker: UnfenceBrokerRecord(id=1, epoch=176) (org.a
 You can deploy Kafka Client using the following command:
 
 ```bash
-kubectl apply -f 00-namespace.yaml
 kubectl apply -f 02-kafka-client.yaml
 ```
 
