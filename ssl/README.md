@@ -37,7 +37,7 @@ It isolates Kafka resources within a dedicated namespace for better organization
 
 ## Kafka Broker SSL Keys and Certificates
 
-The first step to enable [SSL encryption](https://docs.confluent.io/platform/current/kafka/encryption.html#encrypt-with-tls) is to create public/private keypair for every server.
+The first step to enable [SSL encryption](https://docs.confluent.io/platform/current/kafka/encryption.html#encrypt-with-tls) is to create public/private key pair for every server.
 
 > :warning: The commands in this section were executed in a Docker container running the image `openjdk:11.0.10-jre` because it's the same Java version (Java 11) that Confluent runs. With this approach, any possible Java version-related issue is prevented.
 
