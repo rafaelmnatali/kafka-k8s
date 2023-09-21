@@ -366,7 +366,7 @@ kafka-topics --create --topic test-ssl --partitions 3 --replication-factor 3 --b
 Created topic test-ssl.
 ```
 
-:warning A variável de ambiente `BOOTSTRAP_SERVER` contém a lista dos brokers, economizando tempo ao digitar.
+:warning: A variável de ambiente `BOOTSTRAP_SERVER` contém a lista dos brokers, economizando tempo ao digitar.
 
 Liste todos os tópicos do Kafka:
 
