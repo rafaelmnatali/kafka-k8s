@@ -45,7 +45,7 @@ Uma [Service Account](https://kubernetes.io/docs/concepts/security/service-accou
 
 Um [headless Service](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services) chamado `kafka-headless` é criado no _namespace_ `kafka`.
 
-Ele expõe as portas 9092 (para clientes do Kafka) e 29093 (para o Controlador do Kafka). 
+Ele expõe as portas 9092 (para clientes do Kafka) e 29093 (para o Controlador do Kafka).
 
 ### StatefulSet (kind: StatefulSet)
 
@@ -57,7 +57,7 @@ Cada pod está associado ao serviço `kafka-headless` e à conta de serviço `ka
 
 ## Uso
 
-### Implantaçāo 
+### Implantaçāo
 
 Implemente o Kafka usando os seguintes comandos:
 
@@ -76,7 +76,7 @@ Você pode verificar os logs do primeiro pod com o seguinte comando:
 kubectl logs kafka-0
 ```
 
-A resoluçāo de nomes para os três pods pode demorar mais tempo do que o pod a iniciar, entāo, você pode ver erros `UnknownHostException`` nos logs durante a inicializaçāo: 
+A resoluçāo de nomes para os três pods pode demorar mais tempo do que o pod a iniciar, entāo, você pode ver erros `UnknownHostException`` nos logs durante a inicializaçāo:
 
 ```bash
 WARN [RaftManager nodeId=2] Error connecting to node kafka-1.kafka-headless.kafka.svc.cluster.local:29093 (id: 1 rack: null) (org.apache.kafka.clients.NetworkClient) java.net.UnknownHostException: kafka-1.kafka-headless.kafka.svc.cluster.local         ... 
@@ -98,18 +98,19 @@ Abra um terminal e entre no pod `kafka-0`:
 kubectl exec -it kafka-0 -- bash
 ```
 
-Crie um tópico chamado test com três partições e um fator de replicaçāo de 3. 
+Crie um tópico chamado test com três partições e um fator de replicaçāo de 3.
 
 ```bash
 kafka-topics --create --topic test --partitions 3 --replication-factor 3 --bootstrap-server kafka-0.kafka-headless.kafka.svc.cluster.local:9092
 ```
+
 Verifique as partições do tópico estāo replicadas no três brokers:
 
 ```bash
 kafka-topics --describe --topic test --bootstrap-server kafka-0.kafka-headless.kafka.svc.cluster.local:9092
 ```
 
-A saída do comando anterior deve ser similar a esta: 
+A saída do comando anterior deve ser similar a esta:
 
 ```bash
 Topic: test     TopicId: WmMXgsr2RcyZU9ohfoTUWQ PartitionCount: 3       ReplicationFactor: 3    Configs: 
@@ -120,7 +121,7 @@ Topic: test     TopicId: WmMXgsr2RcyZU9ohfoTUWQ PartitionCount: 3       Replicat
 
 Podemos ver que existem três réplicas sincronizadas (Isr).
 
-Agora vamos simular a queda de um dos brokers. Abrar um novo terminal e entre o seguinte comando: 
+Agora vamos simular a queda de um dos brokers. Abrar um novo terminal e entre o seguinte comando:
 
 ```bash
 kubectl scale sts kafka --replicas 2
