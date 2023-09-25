@@ -1,0 +1,174 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kafka
+  namespace: kafka
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kafka
+  name: kafka-headless
+  namespace: kafka
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp-kafka-int
+    port: 9092
+    protocol: TCP
+    targetPort: tcp-kafka-int
+  selector:
+    app: kafka
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: kafka
+  name: kafka
+  namespace: kafka
+spec:
+  podManagementPolicy: Parallel
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: kafka
+  serviceName: kafka-headless
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      serviceAccountName: kafka
+      containers:
+      - command:
+        - sh
+        - -exc
+        - |
+          export KAFKA_NODE_ID=${HOSTNAME##*-} && \
+          export KAFKA_ADVERTISED_LISTENERS=SASL://${POD_NAME}.kafka-headless.kafka.svc.cluster.local:9092
+
+          exec /etc/confluent/docker/run
+        env:
+        - name: KAFKA_LISTENER_NAME_SASL_PLAIN_SASL_JAAS_CONFIG
+          value: org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="admin-secret" user_admin="admin-secret" user_kafkaclient1="kafkaclient1-secret"; 
+        - name: KAFKA_SASL_ENABLED_MECHANISMS
+          value: PLAIN
+        - name: KAFKA_SASL_MECHANISM_INTER_BROKER_PROTOCOL
+          value: PLAIN
+        - name: KAFKA_INTER_BROKER_LISTENER_NAME
+          value: SASL
+        - name: KAFKA_SSL_KEY_CREDENTIALS
+          value: "broker_creds"
+        - name: KAFKA_SSL_KEYSTORE_CREDENTIALS
+          value: "broker_creds"
+        - name: KAFKA_SSL_TRUSTSTORE_CREDENTIALS
+          value: "broker_creds"
+        - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
+          value: "CONTROLLER:PLAINTEXT,SASL:SASL_PLAINTEXT"
+        - name: CLUSTER_ID
+          value: "6PMpHYL9QkeyXRj9Nrp4KA"
+        - name: KAFKA_CONTROLLER_QUORUM_VOTERS
+          value: "0@kafka-0.kafka-headless.kafka.svc.cluster.local:29093,1@kafka-1.kafka-headless.kafka.svc.cluster.local:29093,2@kafka-2.kafka-headless.kafka.svc.cluster.local:29093"
+        - name: KAFKA_PROCESS_ROLES
+          value: "broker,controller"
+        - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+          value: "3"
+        - name: KAFKA_NUM_PARTITIONS
+          value: "3"
+        - name: KAFKA_DEFAULT_REPLICATION_FACTOR
+          value: "3"
+        - name: KAFKA_MIN_INSYNC_REPLICAS
+          value: "2"
+        - name: KAFKA_CONTROLLER_LISTENER_NAMES
+          value: "CONTROLLER"
+        - name: KAFKA_LISTENERS
+          value: SASL://0.0.0.0:9092,CONTROLLER://0.0.0.0:29093
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        name: kafka
+        image: docker.io/confluentinc/cp-kafka:7.5.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          successThreshold: 1
+          tcpSocket:
+            port: tcp-kafka-int
+          timeoutSeconds: 5
+        ports:
+        - containerPort: 9092
+          name: tcp-kafka-int
+          protocol: TCP
+        - containerPort: 29093
+          name: tcp-kafka-ctrl
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1400Mi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 1000
+          runAsUser: 1000
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/kafka
+          name: config
+        - mountPath: /var/lib/kafka/data
+          name: data
+        - mountPath: /var/log
+          name: logs
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: config
+      - emptyDir: {}
+        name: logs
+      - name: kafka-ssl
+        configMap: 
+          name: kafka-ssl
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: standard
+      volumeMode: Filesystem
+    status:
+      phase: Pending
