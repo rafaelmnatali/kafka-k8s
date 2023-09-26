@@ -1,6 +1,6 @@
-# Kafka with SSL
+# Kafka with SASL
 
-- [Kafka with SSL](#kafka-with-ssl)
+- [Kafka with SASL](#kafka-with-sasl)
   - [Description](#description)
   - [Environment](#environment)
   - [Namespace](#namespace)
