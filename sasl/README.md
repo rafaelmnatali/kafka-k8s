@@ -17,7 +17,7 @@
 
 ## Description
 
-Deploying and running the Community Version of Kafka packaged with the Confluent Community download and configured to use [SASL/PLAIN authentication](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_plain.html#clients).
+Deploying and running the Community Version of Kafka packaged with the Confluent Community download and configured to use [SASL/PLAIN authentication](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_plain.html).
 
 :warning: **PLAIN** versus **PLAINTEXT**: Do not confuse the SASL mechanism PLAIN with the no TLS/SSL encryption option, which is called PLAINTEXT. Configuration parameters such as `sasl.enabled.mechanisms` or `sasl.mechanism.inter.broker.protocol` may be configured to use the SASL mechanism PLAIN, whereas `security.inter.broker.protocol` or `listeners` may be configured to use the no TLS/SSL encryption option, SASL_PLAINTEXT.
 
