@@ -307,7 +307,7 @@ You can deploy Kafka using the following commands:
 
 ```bash
 kubectl apply -f 00-namespace.yaml
-kubectl apply -f 01-kafka-local.yaml
+kubectl apply -f 01-kafka.yaml
 ```
 
 Check if the Pods are `Running`:

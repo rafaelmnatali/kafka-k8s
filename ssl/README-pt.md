@@ -307,7 +307,7 @@ Implemente o Kafka usando os seguintes comandos:
 
 ```bash
 kubectl apply -f 00-namespace.yaml
-kubectl apply -f 01-kafka-local.yaml
+kubectl apply -f 01-kafka.yaml
 ```
 
 ### Verifique a comunicação entre os brokers
