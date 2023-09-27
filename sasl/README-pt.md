@@ -53,7 +53,7 @@ Precisamos configurar os brokers e clientes para utilizar a autenticaçāo `SASL
       value: PLAIN
     ```
 
-2. nforme aos brokers do Kafka em quais portas devem ouvir as conexões SASL de clientes e interbroker. Configure as propriedades `listeners` e `advertised.listeners` da seguinte forma:
+2. Informe aos brokers do Kafka em quais portas devem ouvir as conexões SASL de clientes e interbroker. Configure as propriedades `listeners` e `advertised.listeners` da seguinte forma:
 
     ```yaml
     - command:
