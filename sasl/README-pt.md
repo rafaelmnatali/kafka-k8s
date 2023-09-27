@@ -19,7 +19,7 @@
 
 Implantando e executando a Versão Comunitária do Kafka empacotada com o download da Comunidade Confluent e configurada para usar [autenticaçāo SASL/PLAIN](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_plain.html).
 
-:warning: **PLAIN** versus **PLAINTEXT**: Não confunda o mecanismo SASL_PLAIN com a opção de criptografia sem TLS/SSL, chamada PLAINTEXT. Parâmetros de configuração, como `sasl.enabled.mechanisms` ou `sasl.mechanism.inter.broker.protocol`, podem ser configurados para usar o mecanismo SASL_PLAIN, enquanto `security.inter.broker.protocol` ou `listeners` podem ser configurados para usar a opção sem criptografia TLS/SSL, SASL_PLAINTEXT.
+:warning: **PLAIN** versus **PLAINTEXT**: Não confunda o mecanismo SASL/PLAIN com a opção de criptografia sem TLS/SSL, chamada PLAINTEXT. Parâmetros de configuração, como `sasl.enabled.mechanisms` ou `sasl.mechanism.inter.broker.protocol`, podem ser configurados para usar o mecanismo SASL/PLAIN, enquanto `security.inter.broker.protocol` ou `listeners` podem ser configurados para usar a opção sem criptografia TLS/SSL, SASL_PLAINTEXT.
 
 ## Ambiente
 
