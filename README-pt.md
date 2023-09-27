@@ -4,6 +4,7 @@ Recursos para um [tutorial](https://rafaelnatali.wixsite.com/rmn-technology/pt/p
 
 - [Quickstart: confluent-local](./confluent-local/README-pt.md)
 - [Kafka with SSL](./ssl/README-pt.md)
+- [Kafka with SASL Authentication](./sasl/README-pt.md)
 
 ## Contribuindo
 
