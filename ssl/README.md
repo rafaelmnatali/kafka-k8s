@@ -279,7 +279,7 @@ Create two ConfigMaps, one for the Kafka Broker and another one for our Kafka Cl
 
 ## Confluent Kafka
 
-This [yaml file](01-kafka-local.yaml) deploys a Kafka cluster within a Kubernetes namespace named `kafka`. It defines various Kubernetes resources required for setting up Kafka in a distributed manner.
+This [yaml file](01-kafka.yaml) deploys a Kafka cluster within a Kubernetes namespace named `kafka`. It defines various Kubernetes resources required for setting up Kafka in a distributed manner.
 
 Here's a breakdown of what this file does:
 
